@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://bwpv7x8lam3n2"]
 
-[ext_resource type="PackedScene" uid="uid://2oqfqxx5b61g" path="res://robot.tscn" id="1_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://bpvh71wfng7g6" path="res://player.tscn" id="2_h2yge"]
-[ext_resource type="PackedScene" uid="uid://cu68dkhnrithv" path="res://turret.tscn" id="3_h2yge"]
-[ext_resource type="PackedScene" uid="uid://bwlqepvfd1x8u" path="res://exit.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://2oqfqxx5b61g" path="res://scenes/robot.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bpvh71wfng7g6" path="res://scenes/player.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://cu68dkhnrithv" path="res://scenes/turret.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://bwlqepvfd1x8u" path="res://scenes/exit.tscn" id="4_1bvp3"]
 [ext_resource type="Script" uid="uid://bund3ks535x1t" path="res://scripts/main.gd" id="5_chatbot"]
 [ext_resource type="Script" uid="uid://ctmwkjpyrdlnl" path="res://scripts/ai_client.gd" id="6_ai_client"]
 

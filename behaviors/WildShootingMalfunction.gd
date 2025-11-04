@@ -7,7 +7,7 @@ var shoot_interval = 0.1  # Very fast shooting
 
 func _start_malfunction():
 	# Load bullet scene
-	bullet_scene = preload("res://bullet.tscn")
+	bullet_scene = preload("res://scenes/bullet.tscn")
 	# Robot shouts the warning
 	RobotShout.shout(robot, "WILD SHOOTING!\nDanger zone!", 3.0)
 

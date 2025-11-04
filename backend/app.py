@@ -72,16 +72,26 @@ async def generate_text(request: PromptRequest) -> PromptResponse:
             "Authorization": f"Bearer {HF_API_KEY}",
             "Content-Type": "application/json"
         }
+        # Build the full prompt with roleplay instructions
+        # Some models don't handle system messages well, so we include it in the user message
+        full_prompt = """You ARE a malfunctioning robot in a repair game. Roleplay as the robot in first person.
+
+CONTEXT:
+- You move forward automatically but malfunction every 2-8 seconds (walking backwards, dashing, shooting wildly, self-destructing, etc.)
+- The player is your repair technician who fixes you with specific repairs
+- Each malfunction has a specific repair - wrong repairs fail
+- You have limited repair skills but can gain more throughout the world
+- You're grateful when fixed, frustrated when malfunctioning
+- Keep responses under 25 words, conversational, and in first person
+
+Now respond as the robot: """ + request.prompt
+        
         payload = {
             "model": HF_MODEL,
             "messages": [
                 {
-                    "role": "system",
-                    "content": "You are a friendly and helpful AI assistant. Keep your responses concise and conversational."
-                },
-                {
                     "role": "user",
-                    "content": request.prompt
+                    "content": full_prompt
                 }
             ],
             "max_tokens": 100,
@@ -90,7 +100,8 @@ async def generate_text(request: PromptRequest) -> PromptResponse:
         
         print(f"Calling Inference Providers API: {HF_API_URL}", file=sys.stderr)
         print(f"Model: {HF_MODEL}", file=sys.stderr)
-        print(f"Prompt: {request.prompt[:100]}...", file=sys.stderr)
+        print(f"Full prompt being sent: {full_prompt[:200]}...", file=sys.stderr)
+        print(f"Original user prompt: {request.prompt[:100]}...", file=sys.stderr)
         
         response = requests.post(HF_API_URL, headers=headers, json=payload, timeout=60)
         

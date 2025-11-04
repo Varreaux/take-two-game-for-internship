@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://2oqfqxx5b61g"]
 
-[ext_resource type="Script" uid="uid://c767kqehm52q6" path="res://robot.gd" id="1_7k104"]
-[ext_resource type="Texture2D" uid="uid://dw87yblp8f437" path="res://industrial.v2.png" id="2_dfm56"]
-[ext_resource type="Script" uid="uid://c64i3slnxy0wk" path="res://shield.gd" id="3_shield"]
+[ext_resource type="Script" uid="uid://c767kqehm52q6" path="res://scripts/game/robot.gd" id="1_7k104"]
+[ext_resource type="Texture2D" uid="uid://dw87yblp8f437" path="res://assets/sprites/industrial.v2.png" id="2_dfm56"]
+[ext_resource type="Script" uid="uid://c64i3slnxy0wk" path="res://scripts/game/shield.gd" id="3_shield"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4gyqm"]
 size = Vector2(83, 97)
