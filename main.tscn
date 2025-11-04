@@ -1,53 +1,109 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwpv7x8lam3n2"]
+[gd_scene load_steps=9 format=3 uid="uid://bwpv7x8lam3n2"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_0abc1"]
-[ext_resource type="Script" path="res://scripts/ai_client.gd" id="2_0abc2"]
+[ext_resource type="PackedScene" uid="uid://2oqfqxx5b61g" path="res://robot.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bpvh71wfng7g6" path="res://player.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://cu68dkhnrithv" path="res://turret.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://bwlqepvfd1x8u" path="res://exit.tscn" id="4_1bvp3"]
+[ext_resource type="Script" uid="uid://bund3ks535x1t" path="res://scripts/main.gd" id="5_chatbot"]
+[ext_resource type="Script" uid="uid://ctmwkjpyrdlnl" path="res://scripts/ai_client.gd" id="6_ai_client"]
 
-[node name="Main" type="Control"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rx4tx"]
+size = Vector2(3254, 48.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gs37m"]
+size = Vector2(18.009277, 64)
+
+[node name="TestingScene" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-192, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1435, 24.25)
+shape = SubResource("RectangleShape2D_rx4tx")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
+offset_left = -174.0
+offset_right = 3186.0
+offset_bottom = 49.0
+color = Color(0.18787262, 0.13672075, 0.08358785, 1)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(160, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(136.93448, -167.00494)
+rotation = 1.5801622
+shape = SubResource("RectangleShape2D_gs37m")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D2"]
+offset_left = 104.0
+offset_top = -159.0
+offset_right = 120.775894
+offset_bottom = -95.0
+rotation = -1.5706844
+color = Color(0.1882353, 0.13725491, 0.08235294, 1)
+
+[node name="Enemy" parent="." instance=ExtResource("1_0xm2m")]
+position = Vector2(-44, -83)
+
+[node name="player" parent="." instance=ExtResource("2_h2yge")]
+position = Vector2(-182, -20)
+
+[node name="Camera2D" type="Camera2D" parent="player"]
+position = Vector2(-24, 32)
+
+[node name="turret" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(444, -30.000008)
+rotation = -1.5828631
+
+[node name="exit" parent="." instance=ExtResource("4_1bvp3")]
+position = Vector2(690, -92)
+
+[node name="ChatbotUI" type="CanvasLayer" parent="."]
+
+[node name="ChatbotControl" type="Control" parent="ChatbotUI"]
 layout_mode = 3
-anchors_preset = 15
+anchor_top = 0.6
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_0abc1")
+grow_vertical = 0
+script = ExtResource("5_chatbot")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="ChatbotUI/ChatbotControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = 20.0
-offset_right = -20.0
-offset_bottom = -20.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ChatDisplay" type="RichTextLabel" parent="VBoxContainer"]
+[node name="ChatDisplay" type="RichTextLabel" parent="ChatbotUI/ChatbotControl/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = ""
 bbcode_enabled = true
 scroll_following = true
 
-[node name="LoadingLabel" type="Label" parent="VBoxContainer"]
+[node name="LoadingLabel" type="Label" parent="ChatbotUI/ChatbotControl/VBoxContainer"]
 layout_mode = 2
-text = ""
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ChatbotUI/ChatbotControl/VBoxContainer"]
 layout_mode = 2
 
-[node name="InputField" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+[node name="InputField" type="LineEdit" parent="ChatbotUI/ChatbotControl/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Type your message here..."
 
-[node name="SendButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="SendButton" type="Button" parent="ChatbotUI/ChatbotControl/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Send"
 
-[node name="AIClient" type="Node" parent="."]
-script = ExtResource("2_0abc2")
-
+[node name="AIClient" type="Node" parent="ChatbotUI/ChatbotControl"]
+script = ExtResource("6_ai_client")

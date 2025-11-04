@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwlqepvfd1x8u"]
+
+[ext_resource type="Script" uid="uid://ddcxsbtv5lwx6" path="res://exit.gd" id="1_6sfst"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k4lu3"]
+size = Vector2(38, 90)
+
+[node name="exit" type="Area2D"]
+script = ExtResource("1_6sfst")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(19, 44)
+shape = SubResource("RectangleShape2D_k4lu3")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 91.0
+
+[node name="ExitSign" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -30.0
+offset_right = 60.0
+offset_bottom = -10.0
+text = "EXIT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
